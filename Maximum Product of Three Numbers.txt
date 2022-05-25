@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        int e=nums.size()-1;
+        sort(nums.begin(),nums.end());
+        int poe=(nums[e]*nums[e-1]*nums[e-2]);
+        int  pos=(nums[e]*nums[0]*nums[1]);
+        return max(poe,pos);
+    }
+};
