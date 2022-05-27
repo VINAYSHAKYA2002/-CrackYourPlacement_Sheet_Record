@@ -1,0 +1,18 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+       unsigned rev = 0;
+        unsigned original = x;
+        if(x<0)
+        {
+            return false;
+            
+        }
+        while(x!=0)
+        {
+            rev=rev*10+x%10;
+            x=x/10;
+           
+        }
+       return rev==original;
+    }
