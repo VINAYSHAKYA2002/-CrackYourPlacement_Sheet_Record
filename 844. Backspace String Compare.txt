@@ -1,0 +1,39 @@
+class Solution {
+public:
+    
+    // use Monotonic stack, Time Complexity O(n); 
+    int sumSubarrayMins(vector<int>& arr) {
+        
+        // arr's length and mod (as the result may be large)
+        int n = arr.size(), mod = 1e9+7;
+        long sum = 0;
+        // use pair of stack to store the index and its sum for each time.
+        stack<pair<int,long>> st;
+        
+        // we start from the tail of the arr
+        for(int i=n-1; i>=0; i--){
+            // if the stack is not empty, and the current number is smaller than the top of the stack
+            // we can just pop them out until the top one is smaller than current number
+            while(!st.empty() && arr[i] <= arr[st.top().first]){
+                st.pop();
+            }
+            
+            // for the stack is empty, it means that the current number is the smallest until now,
+            // so we can just push its index, and it value multuple (n-i) -> the number it is large than ans itself
+            if(st.empty()){
+                st.push({i, (arr[i] * (n-i) % mod)});
+            }
+            
+            
+            // the complicated part is when the stack is not empty
+            // as we do the while loop before, the current number must be larger than the top of the stack
+            else {
+                st.push({i, (arr[i] * (st.top().first - i) % mod + st.top().second)});
+            }
+            
+            // just sum of the result for each time
+            sum = (sum + st.top().second) % mod;
+        }
+        return sum;
+    }
+};
