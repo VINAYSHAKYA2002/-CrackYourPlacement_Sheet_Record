@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int max_dia=0;
+    int find_dia(TreeNode* root){
+        if(!root)   return 0;
+        int leftdia = find_dia(root->left);
+        int rightdia = find_dia(root->right);
+        int curr_dia = leftdia+rightdia;
+        max_dia=max(max_dia,curr_dia);
+        cout<<max_dia<<" ";
+        return max(leftdia,rightdia)+1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        int dia=find_dia(root);
+        return max_dia;
+    }
+};
