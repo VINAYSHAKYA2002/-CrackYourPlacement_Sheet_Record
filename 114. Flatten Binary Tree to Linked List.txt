@@ -1,0 +1,29 @@
+class Solution {
+public:
+    
+    void helper(TreeNode *root,queue<TreeNode*>&q)
+    {
+        if(root==NULL)
+            return;
+        q.push(root);
+        helper(root->left,q);
+        helper(root->right,q);
+    }
+    
+    void flatten(TreeNode* root) {
+        if(root==NULL)
+            return;
+        queue<TreeNode*>q;
+        helper(root,q);
+        root->right==NULL;
+        q.pop();
+        while(q.size()!=0)
+        {
+            TreeNode *front=q.front();
+            q.pop();
+            root->right=front;
+            root->left=NULL;
+            root=root->right;
+        }
+    }
+};
