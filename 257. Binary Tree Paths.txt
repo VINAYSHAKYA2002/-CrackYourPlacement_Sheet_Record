@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<string> sv;
+    string s;
+    
+    void ch(TreeNode* root,string s)
+    { 
+      if(!root) return;
+      if(root->left ==NULL && root->right==NULL)  {  s+=to_string(root->val);  sv.push_back(s); }
+      ch(root->left,s+to_string(root->val)+"->");
+      ch(root->right,s+to_string(root->val)+"->");
+        
+     }
+    
+    
+    vector<string> binaryTreePaths(TreeNode* root) {
+        
+        ch(root,s);
+        return sv;
+    }
+};

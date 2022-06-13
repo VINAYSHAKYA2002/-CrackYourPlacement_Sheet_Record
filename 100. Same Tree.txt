@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p && q){
+            if(p->val ==q->val)
+			//if equal continue checking the left and right subtree
+                return isSameTree(p->left,q->left) && isSameTree(p->right,q->right);
+            else
+                return false;
+        }
+		// to check if both trees pointer  are pointing to the NULL
+        return p==q;
+    }
+};
