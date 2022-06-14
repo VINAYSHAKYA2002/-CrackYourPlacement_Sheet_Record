@@ -1,0 +1,48 @@
+class Solution {
+public:
+    string decodeString(string s) {
+        string ans = ""; int i=0;
+        
+        while(i < s.size()){
+            if(s[i] >= 97 and s[i] <= 122){
+                ans += s[i];
+                i++;
+            }
+            else{
+                int it = 0;
+                while(s[i] != '['){
+                    it *= 10;
+                    it += (s[i] - 48);
+                    i++;
+                }
+                
+                string s2 = "";
+                
+                int ob = 0, cb = 0;
+                if(s[i] == '[') ob++;
+                i++;
+
+                
+                while(i < s.size()){
+                    
+                    if(s[i] == '[') ob++;
+                    else if(s[i] == ']'){
+                        cb++;
+                        if(ob == cb) break;
+                    } 
+                    
+                    s2 += s[i]; i++;
+                }
+                
+                string str = decodeString(s2);
+                while(it--){
+                    ans += str;
+                }
+                
+                i++;
+            }
+        }
+        
+        return ans;
+    }
+};
