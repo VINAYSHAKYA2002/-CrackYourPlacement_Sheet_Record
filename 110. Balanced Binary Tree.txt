@@ -1,0 +1,36 @@
+class balance {
+    public:
+    bool isBalanced;
+    int height;
+};
+class Solution {
+public:
+    balance isbalance(TreeNode *root)
+    {
+        if(root==NULL)
+        {
+            balance output;
+            output.isBalanced=true;
+            output.height=0;
+            return output;
+        }
+        balance left=isbalance(root->left);
+        balance right=isbalance(root->right);
+        balance output;
+        if(left.isBalanced && right.isBalanced)
+        {
+            if(abs(left.height-right.height)<=1)
+            {
+                output.isBalanced=true;
+            }
+            else
+                output.isBalanced=false;
+        }
+        output.height=1+max(left.height,right.height);
+        return output;
+    }
+    bool isBalanced(TreeNode* root) {
+        balance ans=isbalance(root);
+        return ans.isBalanced;
+    }
+};
